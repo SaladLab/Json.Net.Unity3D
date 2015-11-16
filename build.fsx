@@ -54,6 +54,8 @@ Target "Help" (fun _ ->
       ""
       " Targets for building:"
       " * Build        Build"
+      " * Test         Test"
+      " * Package      Build Unity Package"
       ""]
 )
 
