@@ -7,8 +7,8 @@ public static class PackageBuilder
     {
         var assetPaths = new string[]
         {
-            "Assets/Middleware/JsonNet",
-            "Assets/Middleware/JsonNetSample",
+            "Assets/Middlewares/JsonNet",
+            "Assets/Middlewares/JsonNetSample",
         };
 
         var packagePath = "Json-Net-Unity3D.unitypackage";

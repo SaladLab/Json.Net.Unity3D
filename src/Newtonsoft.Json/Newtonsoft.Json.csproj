@@ -217,7 +217,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)tools\unity3d\pdb2mdb.exe $(TargetDir)Newtonsoft.Json.dll
-COPY /Y $(TargetDir)Newtonsoft.Json.dll* $(SolutionDir)src\UnityPackage\Assets\Middleware\JsonNet
+COPY /Y $(TargetDir)Newtonsoft.Json.dll* $(SolutionDir)src\UnityPackage\Assets\Middlewares\JsonNet
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
