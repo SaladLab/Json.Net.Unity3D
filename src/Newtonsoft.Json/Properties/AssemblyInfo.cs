@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -68,7 +68,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Newtonsoft")]
 [assembly: AssemblyProduct("Json.NET")]
-[assembly: AssemblyCopyright("Copyright ?James Newton-King 2008")]
+[assembly: AssemblyCopyright("Copyright © James Newton-King 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -95,5 +95,5 @@ using System.Security;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("7.0.0.0")]
-[assembly: AssemblyFileVersion("7.0.2.18802")]
+[assembly: AssemblyFileVersion("7.0.1.1")]
 [assembly: CLSCompliant(true)]
