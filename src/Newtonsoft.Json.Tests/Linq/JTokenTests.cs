@@ -1203,6 +1203,7 @@ namespace Newtonsoft.Json.Tests.Linq
             }, "Additional text encountered after finished reading JSON content: ,. Path '', line 5, position 1.");
         }
 
+#if !UNITY3D
         [Test]
         public void Path()
         {
@@ -1240,7 +1241,7 @@ namespace Newtonsoft.Json.Tests.Linq
 
             Assert.AreEqual("[0]", a[0].Path);
         }
-
+#endif
         [Test]
         public void Parse_NoComments()
         {

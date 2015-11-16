@@ -110,7 +110,7 @@ namespace Newtonsoft.Json.Serialization
 
         private static readonly JsonConverter[] BuiltInConverters =
         {
-#if !(NET20 || DOTNET || PORTABLE40 || PORTABLE)
+#if !(NET20 || DOTNET || PORTABLE40 || PORTABLE || UNITY3D)
             new EntityKeyMemberConverter(),
 #endif
 #if !(NET35 || NET20 || PORTABLE40)
