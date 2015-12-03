@@ -31,7 +31,9 @@ using System.Numerics;
 #endif
 using System.Text;
 using System.IO;
+#if !(UNITY3D)
 using System.Xml;
+#endif
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
@@ -333,7 +335,7 @@ namespace Newtonsoft.Json
             _writer.Write(value);
         }
 
-        #region WriteValue methods
+#region WriteValue methods
         /// <summary>
         /// Writes a <see cref="Object"/> value.
         /// An error will raised if the value cannot be written as a single JSON token.
@@ -705,7 +707,7 @@ namespace Newtonsoft.Json
                 WriteEscapedString(value.OriginalString, true);
             }
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Writes out a comment <code>/*...*/</code> containing the specified text. 

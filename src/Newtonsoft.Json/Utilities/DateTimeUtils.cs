@@ -25,7 +25,9 @@
 
 using System;
 using System.IO;
+#if !UNITY3D
 using System.Xml;
+#endif
 using System.Globalization;
 
 namespace Newtonsoft.Json.Utilities
@@ -195,7 +197,7 @@ namespace Newtonsoft.Json.Utilities
             return dateTime;
         }
 
-        #region Parse
+#region Parse
 
         internal static bool TryParseDateTimeIso(StringReference text, DateTimeZoneHandling dateTimeZoneHandling, out DateTime dt)
         {
@@ -583,9 +585,9 @@ namespace Newtonsoft.Json.Utilities
 
             return true;
         }
-        #endregion
+#endregion
 
-        #region Write
+#region Write
         internal static void WriteDateTimeString(TextWriter writer, DateTime value, DateFormatHandling format, string formatString, CultureInfo culture)
         {
             if (string.IsNullOrEmpty(formatString))
@@ -733,7 +735,7 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 #endif
-        #endregion
+#endregion
 
         private static void GetDateValues(DateTime td, out int year, out int month, out int day)
         {

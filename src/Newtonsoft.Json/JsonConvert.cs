@@ -34,7 +34,9 @@ using System.Threading.Tasks;
 #endif
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities;
+#if !(UNITY3D)
 using System.Xml;
+#endif
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Text;
@@ -504,7 +506,7 @@ namespace Newtonsoft.Json
             throw new ArgumentException("Unsupported type: {0}. Use the JsonSerializer class to get the object's JSON representation.".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
         }
 
-        #region Serialize
+#region Serialize
         /// <summary>
         /// Serializes the specified object to a JSON string.
         /// </summary>
@@ -693,9 +695,9 @@ namespace Newtonsoft.Json
             return Task.Factory.StartNew(() => SerializeObject(value, formatting, settings));
         }
 #endif
-        #endregion
+#endregion
 
-        #region Deserialize
+#region Deserialize
         /// <summary>
         /// Deserializes the JSON to a .NET object.
         /// </summary>
@@ -915,7 +917,7 @@ namespace Newtonsoft.Json
             return Task.Factory.StartNew(() => DeserializeObject(value, type, settings));
         }
 #endif
-        #endregion
+#endregion
 
         /// <summary>
         /// Populates the object with values from the JSON string.
