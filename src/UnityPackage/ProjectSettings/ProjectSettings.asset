@@ -316,7 +316,8 @@ PlayerSettings:
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: NET35;UNITY3D
   metroPackageName: UnityPackage
   metroPackageLogo: 
   metroPackageLogo140: 
