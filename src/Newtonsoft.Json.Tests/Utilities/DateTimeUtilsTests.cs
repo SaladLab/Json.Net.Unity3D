@@ -71,6 +71,32 @@ namespace Newtonsoft.Json.Tests.Utilities
         }
 
         [Test]
+        public void Parse24HourDateTime()
+        {
+            DateTime dt;
+            Assert.IsTrue(DateTimeUtils.TryParseDateTimeIso(CreateStringReference("2000-12-15T24:00:00Z"), DateTimeZoneHandling.RoundtripKind, out dt));
+            Assert.AreEqual(new DateTime(2000, 12, 16, 0, 0, 0, DateTimeKind.Utc), dt);
+
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeIso(CreateStringReference("2000-12-15T24:01:00Z"), DateTimeZoneHandling.RoundtripKind, out dt));
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeIso(CreateStringReference("2000-12-15T24:00:01Z"), DateTimeZoneHandling.RoundtripKind, out dt));
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeIso(CreateStringReference("2000-12-15T24:00:00.0000001Z"), DateTimeZoneHandling.RoundtripKind, out dt));
+        }
+
+#if !NET20
+        [Test]
+        public void Parse24HourDateTimeOffset()
+        {
+            DateTimeOffset dt;
+            Assert.IsTrue(DateTimeUtils.TryParseDateTimeOffsetIso(CreateStringReference("2000-12-15T24:00:00Z"), out dt));
+            Assert.AreEqual(new DateTimeOffset(2000, 12, 16, 0, 0, 0, TimeSpan.Zero), dt);
+
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeOffsetIso(CreateStringReference("2000-12-15T24:01:00Z"), out dt));
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeOffsetIso(CreateStringReference("2000-12-15T24:00:01Z"), out dt));
+            Assert.IsFalse(DateTimeUtils.TryParseDateTimeOffsetIso(CreateStringReference("2000-12-15T24:00:00.0000001Z"), out dt));
+        }
+#endif
+
+        [Test]
         public void NewDateTimeParse()
         {
             AssertNewDateTimeParseEqual("999x-12-31T23:59:59");
@@ -151,6 +177,21 @@ namespace Newtonsoft.Json.Tests.Utilities
         }
 
 #if !NET20
+        [Test]
+        public void ReadOffsetMSDateTimeOffset()
+        {
+            char[] c = @"12345/Date(1418924498000+0800)/12345".ToCharArray();
+            StringReference reference = new StringReference(c, 5, c.Length - 10);
+
+            DateTimeOffset d;
+            DateTimeUtils.TryParseDateTimeOffset(reference, null, CultureInfo.InvariantCulture, out d);
+
+            long initialTicks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(d.DateTime, d.Offset);
+
+            Assert.AreEqual(1418924498000, initialTicks);
+            Assert.AreEqual(8, d.Offset.Hours);
+        }
+
         [Test]
         public void NewDateTimeOffsetParse()
         {

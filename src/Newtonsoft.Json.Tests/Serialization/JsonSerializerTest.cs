@@ -198,6 +198,18 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
 #endif
 
+#if !NET20
+        [Test]
+        public void DeserializeMSDateTimeOffset()
+        {
+            DateTimeOffset d = JsonConvert.DeserializeObject<DateTimeOffset>(@"""/Date(1418924498000+0800)/""");
+            long initialTicks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(d.DateTime, d.Offset);
+
+            Assert.AreEqual(1418924498000, initialTicks);
+            Assert.AreEqual(8, d.Offset.Hours);
+        }
+#endif
+
         [Test]
         public void CaseInsensitiveRequiredPropertyConstructorCreation()
         {
@@ -260,6 +272,23 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 JsonConvert.DeserializeObject<FooRequired>("{Bars:''}");
             }, "Required property 'Bars' expects a value but got null. Path '', line 1, position 9.");
+        }
+
+        public class IgnoredProperty
+        {
+            [JsonIgnore]
+            [JsonProperty(Required = Required.Always)]
+            public string StringProp1 { get; set; }
+            [JsonIgnore]
+            public string StringProp2 { get; set; }
+        }
+
+        [Test]
+        public void NoErrorWhenValueDoesNotMatchIgnoredProperty()
+        {
+            IgnoredProperty p = JsonConvert.DeserializeObject<IgnoredProperty>("{'StringProp1':[1,2,3],'StringProp2':{}}");
+            Assert.IsNull(p.StringProp1);
+            Assert.IsNull(p.StringProp2);
         }
 
         public class Binding
