@@ -9,6 +9,10 @@ This package is for Unity3D programmers that need to use latest Json.NET in Unit
 Visit [Release](https://github.com/SaladbowlCreative/Json.Net.Unity3D/releases)
 page to get latest Json.NET unity-package.
 
+To use this library in IL2CPP build settings, you need to add
+[link.xml](https://github.com/SaladbowlCreative/Json.Net.Unity3D/blob/master/src/UnityPackage/Assets/link.xml) to your project's asset folder.
+For detailed information about link.xml, read unity [manual](http://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) about this.
+
 ## What's the deal?
 
 Unity3D has old-fashioned and bizarre .NET Framework like these :)
@@ -30,3 +34,11 @@ Following works are done to make Json.NET support Unity3D.
  - Remove XML support.
  - Remove JPath class to reduce size of DLL.
  - Remove DiagnosticsTraceWriter support.
+
+## FAQ
+ - Q: App stops throwing MissingMethodException for ComponentModel.TypeConverter like this.
+```
+MissingMethodException: Method not found:
+'Default constructor not found...ctor() of System.ComponentModel.TypeConverter'.
+```
+ - A: link.xml should be added to your project.
