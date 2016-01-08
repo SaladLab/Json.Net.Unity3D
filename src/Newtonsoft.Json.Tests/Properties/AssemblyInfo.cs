@@ -51,7 +51,7 @@ using System.Security;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Newtonsoft")]
 [assembly: AssemblyProduct("Json.NET Tests")]
-[assembly: AssemblyCopyright("Copyright © James Newton-King 2008")]
+[assembly: AssemblyCopyright("Copyright ?James Newton-King 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -75,5 +75,5 @@ using System.Security;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("7.0.0.0")]
-[assembly: AssemblyFileVersion("7.0.2.18802")]
+[assembly: AssemblyVersion("8.0.0.0")]
+[assembly: AssemblyFileVersion("8.0.1.0")]

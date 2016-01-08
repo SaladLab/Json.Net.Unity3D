@@ -75,7 +75,9 @@ namespace Newtonsoft.Json.Converters
 #endif
 #if !UNITY3D
             if (value is SqlBinary)
+            {
                 return ((SqlBinary)value).Value;
+            }
 #endif
             throw new JsonSerializationException("Unexpected value type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
         }
@@ -84,7 +86,9 @@ namespace Newtonsoft.Json.Converters
         private void EnsureReflectionObject(Type t)
         {
             if (_reflectionObject == null)
+            {
                 _reflectionObject = ReflectionObject.Create(t, t.GetConstructor(new[] { typeof(byte[]) }), BinaryToArrayName);
+            }
         }
 #endif
 
@@ -98,14 +102,12 @@ namespace Newtonsoft.Json.Converters
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Type t = (ReflectionUtils.IsNullableType(objectType))
-                ? Nullable.GetUnderlyingType(objectType)
-                : objectType;
-
             if (reader.TokenType == JsonToken.Null)
             {
                 if (!ReflectionUtils.IsNullable(objectType))
+                {
                     throw JsonSerializationException.Create(reader, "Cannot convert null value to {0}.".FormatWith(CultureInfo.InvariantCulture, objectType));
+                }
 
                 return null;
             }
@@ -128,6 +130,10 @@ namespace Newtonsoft.Json.Converters
                 throw JsonSerializationException.Create(reader, "Unexpected token parsing binary. Expected String or StartArray, got {0}.".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
             }
 
+            Type t = (ReflectionUtils.IsNullableType(objectType))
+                ? Nullable.GetUnderlyingType(objectType)
+                : objectType;
+
 #if !NET20
             if (t.AssignableToTypeName(BinaryTypeName))
             {
@@ -138,7 +144,9 @@ namespace Newtonsoft.Json.Converters
 #endif
 #if !UNITY3D
             if (t == typeof(SqlBinary))
+            {
                 return new SqlBinary(data);
+            }
 #endif
             throw JsonSerializationException.Create(reader, "Unexpected object type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, objectType));
         }
@@ -178,14 +186,19 @@ namespace Newtonsoft.Json.Converters
         {
 #if !NET20
             if (objectType.AssignableToTypeName(BinaryTypeName))
+            {
                 return true;
+            }
 #endif
 #if !UNITY3D
             if (objectType == typeof(SqlBinary) || objectType == typeof(SqlBinary?))
+            {
                 return true;
+            }
 #endif
             return false;
         }
     }
 }
+
 #endif

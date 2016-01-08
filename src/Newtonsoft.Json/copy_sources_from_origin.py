@@ -15,7 +15,10 @@ def copy_sources_from_proj(root_path, csproj_name):
                     os.makedirs(file_parts[0])
                 except:
                     pass
-            shutil.copy(os.path.join(root_path, file), file)
+            try:
+                shutil.copy(os.path.join(root_path, file), file)
+            except Exception as e:
+                print "!!!", e
 
 copy_sources_from_proj(
     r'..\..\..\Newtonsoft.Json\Src\Newtonsoft.Json',
