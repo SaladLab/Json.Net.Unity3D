@@ -27,7 +27,7 @@ when you use official Json.NET dll targetting .NET 3.5 Framework.
 
 Following works are done to make Json.NET support Unity3D.
 
- - Based on Newtonsoft Json.NET 8.0.1.
+ - Based on Newtonsoft Json.NET 8.
  - Disable IL generation to work well under AOT environment like iOS.
  - Remove code related with System.ComponentModel.
  - Remove System.Data and EntityKey support.
