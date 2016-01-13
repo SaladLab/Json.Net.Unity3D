@@ -1064,6 +1064,27 @@ third line", jsonTextReader.Value);
         }
 
         [Test]
+        public void UnexpectedEndAfterReadingN()
+        {
+            JsonTextReader reader = new JsonTextReader(new StringReader("n"));
+            ExceptionAssert.Throws<JsonReaderException>(() => reader.Read(), "Unexpected end when reading JSON. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void UnexpectedEndAfterReadingNu()
+        {
+            JsonTextReader reader = new JsonTextReader(new StringReader("nu"));
+            ExceptionAssert.Throws<JsonReaderException>(() => reader.Read(), "Unexpected end when reading JSON. Path '', line 1, position 2.");
+        }
+
+        [Test]
+        public void UnexpectedEndAfterReadingNe()
+        {
+            JsonTextReader reader = new JsonTextReader(new StringReader("ne"));
+            ExceptionAssert.Throws<JsonReaderException>(() => reader.Read(), "Unexpected end when reading JSON. Path '', line 1, position 2.");
+        }
+
+        [Test]
         public void ReadInt32Overflow()
         {
             long i = int.MaxValue;
@@ -2089,6 +2110,15 @@ third line", jsonTextReader.Value);
             Assert.AreEqual(JsonToken.None, reader.TokenType);
         }
 #endif
+
+        [Test]
+        public void ReadAsBooleanNoContent()
+        {
+            JsonTextReader reader = new JsonTextReader(new StringReader(@""));
+
+            Assert.IsNull(reader.ReadAsBoolean());
+            Assert.AreEqual(JsonToken.None, reader.TokenType);
+        }
 
         [Test]
         public void ReadAsDecimalBadContent()
@@ -3583,6 +3613,77 @@ null//comment
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
             ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsBoolean(); }, "Unexpected end when reading JSON. Path '', line 1, position 3.");
+        }
+
+        [Test]
+        public void ReadAsBoolean_NullChar()
+        {
+            string json = '\0' + @"true" + '\0' + '\0';
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            Assert.AreEqual(true, reader.ReadAsBoolean());
+            Assert.AreEqual(null, reader.ReadAsBoolean());
+        }
+
+        [Test]
+        public void ReadAsBoolean_BadData()
+        {
+            string json = @"pie";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsBoolean(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void ReadAsString_BadData()
+        {
+            string json = @"pie";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsString(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void ReadAsDouble_BadData()
+        {
+            string json = @"pie";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDouble(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void ReadAsDouble_Boolean()
+        {
+            string json = @"true";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDouble(); }, "Unexpected character encountered while parsing value: t. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void ReadAsBytes_BadData()
+        {
+            string json = @"pie";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsBytes(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
+        }
+
+        [Test]
+        public void ReadAsDateTime_BadData()
+        {
+            string json = @"pie";
+
+            JsonTextReader reader = new JsonTextReader(new StringReader(json));
+
+            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDateTime(); }, "Unexpected character encountered while parsing value: p. Path '', line 1, position 1.");
         }
 
         [Test]
