@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +39,7 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public class JProperty : JContainer
     {
-        #region JPropertyList
+#region JPropertyList
         private class JPropertyList : IList<JToken>
         {
             internal JToken _token;
@@ -131,7 +133,7 @@ namespace Newtonsoft.Json.Linq
                 }
             }
         }
-        #endregion
+#endregion
 
         private readonly JPropertyList _content = new JPropertyList();
         private readonly string _name;
@@ -398,3 +400,5 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif

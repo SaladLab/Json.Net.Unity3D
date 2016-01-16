@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using System.Globalization;
 #if !(NET20 || NET35 || PORTABLE40 || PORTABLE)
@@ -213,7 +215,7 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        #region WriteValue methods
+#region WriteValue methods
         /// <summary>
         /// Writes a <see cref="Object"/> value.
         /// An error will raised if the value cannot be written as a single JSON token.
@@ -484,6 +486,8 @@ namespace Newtonsoft.Json.Linq
             base.WriteValue(value);
             AddValue(value, JsonToken.String);
         }
-        #endregion
+#endregion
     }
 }
+
+#endif

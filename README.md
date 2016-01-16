@@ -35,7 +35,13 @@ Following works are done to make Json.NET support Unity3D.
  - Remove JPath class to reduce size of DLL.
  - Remove DiagnosticsTraceWriter support.
 
+For Unity.Lite version, additional works are done to make more lite.
+
+ - Remove JsonLinq (JToken, ...)
+ - Remove Bson
+
 ## FAQ
+
  - Q: App stops throwing MissingMethodException for ComponentModel.TypeConverter like this.
 ```
 MissingMethodException: Method not found:

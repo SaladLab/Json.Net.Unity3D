@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_BSON
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -155,3 +157,5 @@ namespace Newtonsoft.Json.Bson
         public BsonToken Value { get; set; }
     }
 }
+
+#endif

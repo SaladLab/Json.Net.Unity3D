@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
@@ -121,3 +123,5 @@ namespace Newtonsoft.Json.Linq
         TimeSpan = 17
     }
 }
+
+#endif

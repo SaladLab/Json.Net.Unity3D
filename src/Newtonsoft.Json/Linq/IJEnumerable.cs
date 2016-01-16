@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System.Collections.Generic;
 
 namespace Newtonsoft.Json.Linq
@@ -44,3 +46,5 @@ namespace Newtonsoft.Json.Linq
         IJEnumerable<JToken> this[object key] { get; }
     }
 }
+
+#endif

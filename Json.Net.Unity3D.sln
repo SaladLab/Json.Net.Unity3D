@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}"
 EndProject
@@ -11,16 +11,20 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseLite|Any CPU = ReleaseLite|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.ReleaseLite|Any CPU.ActiveCfg = ReleaseLite|Any CPU
+		{955B96F2-6AFB-4C2F-AAA5-9BFD6DDCB3BD}.ReleaseLite|Any CPU.Build.0 = ReleaseLite|Any CPU
 		{DD26402C-A73F-47F8-B8BC-F6D9353AA9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD26402C-A73F-47F8-B8BC-F6D9353AA9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD26402C-A73F-47F8-B8BC-F6D9353AA9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD26402C-A73F-47F8-B8BC-F6D9353AA9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD26402C-A73F-47F8-B8BC-F6D9353AA9E0}.ReleaseLite|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

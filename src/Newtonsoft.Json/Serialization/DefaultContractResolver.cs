@@ -132,7 +132,9 @@ namespace Newtonsoft.Json.Serialization
             new DiscriminatedUnionConverter(),
 #endif
             new KeyValuePairConverter(),
+#if !NO_BSON
             new BsonObjectIdConverter(),
+#endif
             new RegexConverter()
         };
 
@@ -488,10 +490,12 @@ namespace Newtonsoft.Json.Serialization
                     Type keyType = dictionaryType.GetGenericArguments()[0];
                     Type valueType = dictionaryType.GetGenericArguments()[1];
 
+#if !NO_JSONLINQ
                     if (keyType.IsAssignableFrom(typeof(string)) && valueType.IsAssignableFrom(typeof(JToken)))
                     {
                         return true;
                     }
+#endif
                 }
 
                 throw new JsonException("Invalid extension data attribute on '{0}'. Member '{1}' type must implement IDictionary<string, JToken>.".FormatWith(CultureInfo.InvariantCulture, GetClrTypeFullName(m.DeclaringType), m.Name));
@@ -1141,12 +1145,12 @@ namespace Newtonsoft.Json.Serialization
             {
                 return CreateDictionaryContract(objectType);
             }
-
+#if !NO_JSONLINQ
             if (t == typeof(JToken) || t.IsSubclassOf(typeof(JToken)))
             {
                 return CreateLinqContract(objectType);
             }
-
+#endif
             if (CollectionUtils.IsDictionaryType(t))
             {
                 return CreateDictionaryContract(objectType);
@@ -1200,7 +1204,11 @@ namespace Newtonsoft.Json.Serialization
             if (typeof(IConvertible).IsAssignableFrom(t)
                 || (ReflectionUtils.IsNullableType(t) && typeof(IConvertible).IsAssignableFrom(Nullable.GetUnderlyingType(t))))
             {
+#if NO_JSONLINQ
+                return true;
+#else
                 return !typeof(JToken).IsAssignableFrom(t);
+#endif
             }
 
             return false;

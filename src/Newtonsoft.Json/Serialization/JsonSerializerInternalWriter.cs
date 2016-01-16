@@ -199,13 +199,17 @@ namespace Newtonsoft.Json.Serialization
                     break;
 #endif
 #if !(DOTNET || PORTABLE40 || PORTABLE)
-                case JsonContractType.Serializable:
+#if !NO_JSONLINQ
+                    case JsonContractType.Serializable:
                     SerializeISerializable(writer, (ISerializable)value, (JsonISerializableContract)valueContract, member, containerContract, containerProperty);
                     break;
 #endif
+#endif
+#if !NO_JSONLINQ
                 case JsonContractType.Linq:
                     ((JToken)value).WriteTo(writer, Serializer.Converters.ToArray());
                     break;
+#endif
             }
         }
 

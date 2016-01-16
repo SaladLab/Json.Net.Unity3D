@@ -1,3 +1,5 @@
+#if !NO_JSONLINQ
+
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
@@ -18,3 +20,5 @@ namespace Newtonsoft.Json.Linq
         Merge = 3
     }
 }
+
+#endif

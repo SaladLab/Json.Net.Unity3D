@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 #if !(DOTNET || PORTABLE || PORTABLE40)
 using System;
 using System.ComponentModel;
@@ -162,5 +164,7 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif
 
 #endif

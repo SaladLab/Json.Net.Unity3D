@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_BSON
+
 namespace Newtonsoft.Json.Bson
 {
     internal enum BsonType : sbyte
@@ -49,3 +51,5 @@ namespace Newtonsoft.Json.Bson
         MaxKey = 127
     }
 }
+
+#endif

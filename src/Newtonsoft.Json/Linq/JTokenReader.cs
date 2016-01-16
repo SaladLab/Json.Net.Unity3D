@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using Newtonsoft.Json.Utilities;
 
@@ -328,3 +330,5 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif

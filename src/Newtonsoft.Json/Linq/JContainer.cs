@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using System.Collections.Generic;
 #if !PORTABLE40
@@ -46,7 +48,7 @@ namespace Newtonsoft.Json.Linq
     /// Represents a token that can contain other tokens.
     /// </summary>
     public abstract class JContainer : JToken, IList<JToken>
-#if !(DOTNET || PORTABLE || PORTABLE40 || UNITY3D || UNITY3D)
+#if !(DOTNET || PORTABLE || PORTABLE40 || UNITY3D)
         , ITypedList, IBindingList
 #endif
         , IList
@@ -54,7 +56,7 @@ namespace Newtonsoft.Json.Linq
         , INotifyCollectionChanged
 #endif
     {
-#if !(DOTNET || PORTABLE40 || PORTABLE || UNITY3D || UNITY3D)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITY3D)
         internal ListChangedEventHandler _listChanged;
         internal AddingNewEventHandler _addingNew;
 
@@ -132,7 +134,7 @@ namespace Newtonsoft.Json.Linq
             return new List<JToken>();
         }
 
-#if !(DOTNET || PORTABLE40 || PORTABLE || UNITY3D || UNITY3D)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITY3D)
         /// <summary>
         /// Raises the <see cref="AddingNew"/> event.
         /// </summary>
@@ -919,7 +921,7 @@ namespace Newtonsoft.Json.Linq
         }
 #endif
 
-        #region IList<JToken> Members
+#region IList<JToken> Members
         int IList<JToken>.IndexOf(JToken item)
         {
             return IndexOfItem(item);
@@ -940,9 +942,9 @@ namespace Newtonsoft.Json.Linq
             get { return GetItem(index); }
             set { SetItem(index, value); }
         }
-        #endregion
+#endregion
 
-        #region ICollection<JToken> Members
+#region ICollection<JToken> Members
         void ICollection<JToken>.Add(JToken item)
         {
             Add(item);
@@ -972,7 +974,7 @@ namespace Newtonsoft.Json.Linq
         {
             return RemoveItem(item);
         }
-        #endregion
+#endregion
 
         private JToken EnsureValue(object value)
         {
@@ -989,7 +991,7 @@ namespace Newtonsoft.Json.Linq
             throw new ArgumentException("Argument is not a JToken.");
         }
 
-        #region IList Members
+#region IList Members
         int IList.Add(object value)
         {
             Add(EnsureValue(value));
@@ -1041,9 +1043,9 @@ namespace Newtonsoft.Json.Linq
             get { return GetItem(index); }
             set { SetItem(index, EnsureValue(value)); }
         }
-        #endregion
+#endregion
 
-        #region ICollection Members
+#region ICollection Members
         void ICollection.CopyTo(Array array, int index)
         {
             CopyItemsTo(array, index);
@@ -1075,9 +1077,9 @@ namespace Newtonsoft.Json.Linq
                 return _syncRoot;
             }
         }
-        #endregion
+#endregion
 
-        #region IBindingList Members
+#region IBindingList Members
 #if !(DOTNET || PORTABLE || PORTABLE40 || UNITY3D)
         void IBindingList.AddIndex(PropertyDescriptor property)
         {
@@ -1168,7 +1170,7 @@ namespace Newtonsoft.Json.Linq
             get { return false; }
         }
 #endif
-        #endregion
+#endregion
 
         internal static void MergeEnumerableContent(JContainer target, IEnumerable content, JsonMergeSettings settings)
         {
@@ -1254,3 +1256,5 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif

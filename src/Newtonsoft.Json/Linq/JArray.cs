@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -283,7 +285,7 @@ namespace Newtonsoft.Json.Linq
             MergeEnumerableContent(this, a, settings);
         }
 
-        #region IList<JToken> Members
+#region IList<JToken> Members
         /// <summary>
         /// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.
         /// </summary>
@@ -331,9 +333,9 @@ namespace Newtonsoft.Json.Linq
         {
             return Children().GetEnumerator();
         }
-        #endregion
+#endregion
 
-        #region ICollection<JToken> Members
+#region ICollection<JToken> Members
         /// <summary>
         /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
         /// </summary>
@@ -396,7 +398,7 @@ namespace Newtonsoft.Json.Linq
         {
             return RemoveItem(item);
         }
-        #endregion
+#endregion
 
         internal override int GetDeepHashCode()
         {
@@ -404,3 +406,5 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif

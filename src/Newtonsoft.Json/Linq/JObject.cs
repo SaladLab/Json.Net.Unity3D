@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -530,7 +532,7 @@ namespace Newtonsoft.Json.Linq
             return (value != null);
         }
 
-        #region IDictionary<string,JToken> Members
+#region IDictionary<string,JToken> Members
         /// <summary>
         /// Adds the specified property name.
         /// </summary>
@@ -596,9 +598,9 @@ namespace Newtonsoft.Json.Linq
                 throw new NotImplementedException();
             }
         }
-        #endregion
+#endregion
 
-        #region ICollection<KeyValuePair<string,JToken>> Members
+#region ICollection<KeyValuePair<string,JToken>> Members
         void ICollection<KeyValuePair<string, JToken>>.Add(KeyValuePair<string, JToken> item)
         {
             Add(new JProperty(item.Key, item.Value));
@@ -662,7 +664,7 @@ namespace Newtonsoft.Json.Linq
             ((IDictionary<string, JToken>)this).Remove(item.Key);
             return true;
         }
-        #endregion
+#endregion
 
         internal override int GetDeepHashCode()
         {
@@ -712,7 +714,7 @@ namespace Newtonsoft.Json.Linq
 #if !(DOTNET || PORTABLE40 || PORTABLE || UNITY3D)
         // include custom type descriptor on JObject rather than use a provider because the properties are specific to a type
 
-        #region ICustomTypeDescriptor
+#region ICustomTypeDescriptor
         /// <summary>
         /// Returns the properties for this instance of a component.
         /// </summary>
@@ -855,7 +857,7 @@ namespace Newtonsoft.Json.Linq
         {
             return null;
         }
-        #endregion
+#endregion
 
 #endif
 
@@ -903,3 +905,5 @@ namespace Newtonsoft.Json.Linq
 #endif
     }
 }
+
+#endif

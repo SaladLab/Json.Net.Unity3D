@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_JSONLINQ
+
 #if !(DOTNET || PORTABLE40 || PORTABLE)
 using System;
 using System.Globalization;
@@ -157,5 +159,7 @@ namespace Newtonsoft.Json.Serialization
         }
     }
 }
+
+#endif
 
 #endif

@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_BSON
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -224,7 +226,7 @@ namespace Newtonsoft.Json.Bson
             }
         }
 
-        #region WriteValue methods
+#region WriteValue methods
         /// <summary>
         /// Writes a <see cref="Object"/> value.
         /// An error will raised if the value cannot be written as a single JSON token.
@@ -492,7 +494,7 @@ namespace Newtonsoft.Json.Bson
             base.WriteValue(value);
             AddToken(new BsonString(value.ToString(), true));
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Writes a <see cref="Byte"/>[] value that represents a BSON object id.
@@ -529,3 +531,5 @@ namespace Newtonsoft.Json.Bson
         }
     }
 }
+
+#endif

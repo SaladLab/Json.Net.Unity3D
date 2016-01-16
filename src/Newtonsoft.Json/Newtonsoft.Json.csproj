@@ -29,6 +29,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLite|AnyCPU'">
+    <OutputPath>bin\ReleaseLite\</OutputPath>
+    <DefineConstants>TRACE;NET35;UNITY3D;NO_JSONLINQ;NO_BSON;</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -206,8 +215,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)tools\unity3d\pdb2mdb.exe $(TargetDir)Newtonsoft.Json.dll
-COPY /Y $(TargetDir)Newtonsoft.Json.dll* $(SolutionDir)src\UnityPackage\Assets\Middlewares\JsonNet
+    <PostBuildEvent>$(SolutionDir)tools\unity3d\pdb2mdb.exe $(TargetPath)
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

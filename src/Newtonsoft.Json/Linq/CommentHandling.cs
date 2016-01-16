@@ -1,4 +1,14 @@
-﻿namespace Newtonsoft.Json.Linq
+﻿#if NO_JSONLINQ
+
+// Dummy namespace
+namespace Newtonsoft.Json.Linq
+{
+    class Dummy { }
+}
+
+#else
+
+namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Specifies how JSON comments are handled when loading JSON.
@@ -32,3 +42,5 @@
         Load = 1
     }
 }
+
+#endif

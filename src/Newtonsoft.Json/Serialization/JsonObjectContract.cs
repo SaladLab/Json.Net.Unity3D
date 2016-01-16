@@ -154,11 +154,15 @@ namespace Newtonsoft.Json.Serialization
             set
             {
                 _extensionDataValueType = value;
+#if !NO_JSONLINQ
                 ExtensionDataIsJToken = (value != null && typeof(JToken).IsAssignableFrom(value));
+#endif
             }
         }
 
+#if !NO_JSONLINQ
         internal bool ExtensionDataIsJToken;
+#endif
         private bool? _hasRequiredOrDefaultValueProperties;
         private ConstructorInfo _parametrizedConstructor;
         private ConstructorInfo _overrideConstructor;

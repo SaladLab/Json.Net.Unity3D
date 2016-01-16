@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+#if !NO_BSON
+
 using System;
 using Newtonsoft.Json.Utilities;
 
@@ -55,3 +57,5 @@ namespace Newtonsoft.Json.Bson
         }
     }
 }
+
+#endif

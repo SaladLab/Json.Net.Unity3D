@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !NO_JSONLINQ
+
+using System;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -47,3 +49,5 @@ namespace Newtonsoft.Json.Linq
         }
     }
 }
+
+#endif

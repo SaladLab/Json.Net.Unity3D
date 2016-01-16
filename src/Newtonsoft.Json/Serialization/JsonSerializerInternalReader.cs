@@ -205,6 +205,7 @@ namespace Newtonsoft.Json.Serialization
             return InternalSerializer;
         }
 
+#if !NO_JSONLINQ
         private JToken CreateJToken(JsonReader reader, JsonContract contract)
         {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
@@ -273,14 +274,15 @@ namespace Newtonsoft.Json.Serialization
                 throw JsonSerializationException.Create(reader, "Unexpected end when deserializing object.");
             }
         }
-
+#endif
         private object CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, object existingValue)
         {
+#if !NO_JSONLINQ
             if (contract != null && contract.ContractType == JsonContractType.Linq)
             {
                 return CreateJToken(reader, contract);
             }
-
+#endif
             do
             {
                 switch (reader.TokenType)
@@ -327,8 +329,10 @@ namespace Newtonsoft.Json.Serialization
 #endif
 
                         return EnsureType(reader, reader.Value, CultureInfo.InvariantCulture, contract, objectType);
+#if !NO_JSONLINQ
                     case JsonToken.Raw:
                         return new JRaw((string)reader.Value);
+#endif
                     case JsonToken.Comment:
                         // ignore
                         break;
@@ -420,6 +424,9 @@ namespace Newtonsoft.Json.Serialization
             }
             else if (Serializer.MetadataPropertyHandling == MetadataPropertyHandling.ReadAhead)
             {
+#if NO_JSONLINQ
+                id = null;
+#else
                 JTokenReader tokenReader = reader as JTokenReader;
                 if (tokenReader == null)
                 {
@@ -443,6 +450,7 @@ namespace Newtonsoft.Json.Serialization
                 {
                     return newValue;
                 }
+#endif
             }
             else
             {
@@ -456,7 +464,11 @@ namespace Newtonsoft.Json.Serialization
 
             if (HasNoDefinedType(contract))
             {
+#if NO_JSONLINQ
+                return null;
+#else
                 return CreateJObject(reader);
+#endif
             }
 
             switch (contract.ContractType)
@@ -569,9 +581,11 @@ namespace Newtonsoft.Json.Serialization
                     return CreateDynamic(reader, dynamicContract, member, id);
 #endif
 #if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !NO_JSONLINQ
                 case JsonContractType.Serializable:
                     JsonISerializableContract serializableContract = (JsonISerializableContract)contract;
                     return CreateISerializable(reader, serializableContract, member, id);
+#endif
 #endif
             }
 
@@ -581,7 +595,7 @@ namespace Newtonsoft.Json.Serialization
 
             throw JsonSerializationException.Create(reader, message);
         }
-
+#if !NO_JSONLINQ
         private bool ReadMetadataPropertiesToken(JTokenReader reader, ref Type objectType, ref JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, object existingValue, out object newValue, out string id)
         {
             id = null;
@@ -677,7 +691,7 @@ namespace Newtonsoft.Json.Serialization
             reader.ReadAndAssert();
             return false;
         }
-
+#endif
         private bool ReadMetadataProperties(JsonReader reader, ref Type objectType, ref JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, object existingValue, out object newValue, out string id)
         {
             id = null;
@@ -842,7 +856,11 @@ namespace Newtonsoft.Json.Serialization
 
             if (HasNoDefinedType(contract))
             {
+#if NO_JSONLINQ
+                return null;
+#else
                 return CreateJToken(reader, contract);
+#endif
             }
 
             JsonArrayContract arrayContract = EnsureArrayContract(reader, objectType, contract);
@@ -1671,6 +1689,7 @@ namespace Newtonsoft.Json.Serialization
         }
 
 #if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !NO_JSONLINQ
         private object CreateISerializable(JsonReader reader, JsonISerializableContract contract, JsonProperty member, string id)
         {
             Type objectType = contract.UnderlyingType;
@@ -1758,6 +1777,7 @@ namespace Newtonsoft.Json.Serialization
 
             return result;
         }
+#endif
 #endif
 
 #if !(NET35 || NET20 || PORTABLE40)
@@ -2472,11 +2492,13 @@ namespace Newtonsoft.Json.Serialization
         private object ReadExtensionDataValue(JsonObjectContract contract, JsonProperty member, JsonReader reader)
         {
             object value;
+#if !NO_JSONLINQ
             if (contract.ExtensionDataIsJToken)
             {
                 value = JToken.ReadFrom(reader);
             }
             else
+#endif
             {
                 value = CreateValueInternal(reader, null, null, null, contract, member, null);
             }

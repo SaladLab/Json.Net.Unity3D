@@ -25,6 +25,16 @@
 
 using System;
 
+#if NO_BSON
+
+// Dummy namespace
+namespace Newtonsoft.Json.Bson
+{
+    class Dummy { }
+}
+
+#else
+
 namespace Newtonsoft.Json.Bson
 {
     internal enum BsonBinaryType : byte
@@ -42,3 +52,5 @@ namespace Newtonsoft.Json.Bson
         UserDefined = 0x80
     }
 }
+
+#endif

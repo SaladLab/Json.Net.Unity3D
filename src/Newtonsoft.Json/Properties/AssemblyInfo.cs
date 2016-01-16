@@ -42,8 +42,13 @@ using System.Security;
 [assembly: AssemblyTitle("Json.NET .NET 2.0")]
 [assembly: AllowPartiallyTrustedCallers]
 #elif UNITY3D
+#if NO_JSONLINQ
+[assembly: AssemblyTitle("Json.NET Unity3D (Lite)")]
+[assembly: AllowPartiallyTrustedCallers]
+#else
 [assembly: AssemblyTitle("Json.NET Unity3D")]
 [assembly: AllowPartiallyTrustedCallers]
+#endif
 #elif NET35
 [assembly: AssemblyTitle("Json.NET .NET 3.5")]
 [assembly: AllowPartiallyTrustedCallers]
