@@ -1,0 +1,8 @@
+version: 8.0.2.{build}
+os: Visual Studio 2015
+configuration: Release
+before_build:
+- cmd: nuget restore
+build:
+  project: Json.Net.Unity3D.sln
+  verbosity: minimal
