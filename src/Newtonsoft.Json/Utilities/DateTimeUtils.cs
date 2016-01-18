@@ -53,7 +53,7 @@ namespace Newtonsoft.Json.Utilities
 
         public static TimeSpan GetUtcOffset(this DateTime d)
         {
-#if NET20
+#if NET20 || UNITY3D
             return TimeZone.CurrentTimeZone.GetUtcOffset(d);
 #else
             return TimeZoneInfo.Local.GetUtcOffset(d);
@@ -288,7 +288,11 @@ namespace Newtonsoft.Json.Utilities
                     offset = new TimeSpan(dateTimeParser.ZoneHour, dateTimeParser.ZoneMinute, 0);
                     break;
                 default:
+#if UNITY3D
+                    offset = GetUtcOffset(d);
+#else
                     offset = TimeZoneInfo.Local.GetUtcOffset(d);
+#endif
                     break;
             }
 
