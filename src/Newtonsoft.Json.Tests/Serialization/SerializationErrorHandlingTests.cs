@@ -322,6 +322,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.",
                 "[1] - 1 - The string was not recognized as a valid DateTime. There is a unknown word starting at index 0."
 #endif
+#if UNITY3D
+, "[1] - 1 - String was not recognized as a valid DateTime."
+#endif
             };
 
             Assert.IsTrue(possibleErrs.Any(m => m == errors[0]),

@@ -35,18 +35,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bson\BsonReaderTests.cs" />
@@ -68,13 +60,6 @@
     <Compile Include="JsonConvertTest.cs" />
     <Compile Include="JsonTextReaderTest.cs" />
     <Compile Include="JsonTextWriterTest.cs" />
-    <Compile Include="LinqToSql\Department.cs" />
-    <Compile Include="LinqToSql\DepartmentConverter.cs" />
-    <Compile Include="LinqToSql\GuidByteArrayConverter.cs" />
-    <Compile Include="LinqToSql\LinqToSqlClasses.designer.cs" />
-    <Compile Include="LinqToSql\LinqToSqlClassesSerializationTests.cs" />
-    <Compile Include="LinqToSql\Person.cs" />
-    <Compile Include="LinqToSql\Role.cs" />
     <Compile Include="Linq\ComponentModel\BindingTests.cs" />
     <Compile Include="Linq\ComponentModel\JPropertyDescriptorTests.cs" />
     <Compile Include="Linq\DynamicTests.cs" />
@@ -149,7 +134,6 @@
     <Compile Include="TestObjects\ConverterPrecedenceClass.cs" />
     <Compile Include="TestObjects\ConverterPrecedenceClassConverter.cs" />
     <Compile Include="TestObjects\Currency.cs" />
-    <Compile Include="TestObjects\CustomerDataSet.cs" />
     <Compile Include="TestObjects\DataContractSerializationAttributesClass.cs" />
     <Compile Include="TestObjects\DateTimeErrorObjectCollection.cs" />
     <Compile Include="TestObjects\DateTimeTestClass.cs" />
@@ -240,7 +224,6 @@
     <Compile Include="TestObjects\SetOnlyPropertyClass2.cs" />
     <Compile Include="TestObjects\Shape.cs" />
     <Compile Include="TestObjects\Shortie.cs" />
-    <Compile Include="TestObjects\SqlTypesDataSet.Designer.cs" />
     <Compile Include="TestObjects\Store.cs" />
     <Compile Include="TestObjects\StoreColor.cs" />
     <Compile Include="TestObjects\StructTest.cs" />
@@ -284,6 +267,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)tools\unity3d\pdb2mdb.exe $(TargetPath)
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

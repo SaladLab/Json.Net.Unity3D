@@ -47,7 +47,9 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Collections;
 #if !(NETFX_CORE || DNXCORE50)
+#if !UNITY3D
 using System.Web.UI;
+#endif
 #endif
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -341,7 +343,12 @@ namespace Newtonsoft.Json.Tests.Linq
             {
                 JObject o = new JObject();
                 ((ICollection<KeyValuePair<string, JToken>>)o).CopyTo(null, 0);
-            }, @"Value cannot be null.
+            },
+#if UNITY3D
+            @"Argument cannot be null.
+Parameter name: array",
+#endif
+            @"Value cannot be null.
 Parameter name: array");
         }
 

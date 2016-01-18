@@ -391,7 +391,7 @@ OnSerialized_Derived
 OnSerialized_Derived_Derived", string.Join(Environment.NewLine, e.ToArray()));
         }
 
-#if !(NET20)
+#if !(NET20 || UNITY3D)
         [Test]
         public void DerivedDerivedSerializationEvents_DataContractSerializer()
         {

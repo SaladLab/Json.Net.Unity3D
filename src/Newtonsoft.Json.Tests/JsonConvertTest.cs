@@ -910,6 +910,7 @@ namespace Newtonsoft.Json.Tests
 
             TestDateTimeFormat(value, new IsoDateTimeConverter());
 
+#if !UNITY3D
 #if !NETFX_CORE
             if (value is DateTime)
             {
@@ -928,7 +929,7 @@ namespace Newtonsoft.Json.Tests
             string json = Encoding.UTF8.GetString(ms.ToArray(), 0, Convert.ToInt32(ms.Length));
             Console.WriteLine(json);
 #endif
-
+#endif
             Console.WriteLine();
 
             return result;
@@ -1025,16 +1026,16 @@ namespace Newtonsoft.Json.Tests
         {
             Task<string> task = null;
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             task = JsonConvert.SerializeObjectAsync(42);
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             task.Wait();
 
             Assert.AreEqual("42", task.Result);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             task = JsonConvert.SerializeObjectAsync(new[] { 1, 2, 3, 4, 5 }, Formatting.Indented);
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             task.Wait();
 
             StringAssert.AreEqual(@"[
@@ -1045,29 +1046,29 @@ namespace Newtonsoft.Json.Tests
   5
 ]", task.Result);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             task = JsonConvert.SerializeObjectAsync(DateTime.MaxValue, Formatting.None, new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
             });
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             task.Wait();
 
             Assert.AreEqual(@"""\/Date(253402300799999)\/""", task.Result);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             var taskObject = JsonConvert.DeserializeObjectAsync("[]");
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             taskObject.Wait();
 
             CollectionAssert.AreEquivalent(new JArray(), (JArray)taskObject.Result);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             Task<object> taskVersionArray = JsonConvert.DeserializeObjectAsync("['2.0']", typeof(Version[]), new JsonSerializerSettings
             {
                 Converters = { new VersionConverter() }
             });
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             taskVersionArray.Wait();
 
             Version[] versionArray = (Version[])taskVersionArray.Result;
@@ -1075,19 +1076,19 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual(1, versionArray.Length);
             Assert.AreEqual(2, versionArray[0].Major);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             Task<int> taskInt = JsonConvert.DeserializeObjectAsync<int>("5");
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             taskInt.Wait();
 
             Assert.AreEqual(5, taskInt.Result);
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             var taskVersion = JsonConvert.DeserializeObjectAsync<Version>("'2.0'", new JsonSerializerSettings
             {
                 Converters = { new VersionConverter() }
             });
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
             taskVersion.Wait();
 
             Assert.AreEqual(2, taskVersion.Result.Major);
@@ -1095,12 +1096,12 @@ namespace Newtonsoft.Json.Tests
             Movie p = new Movie();
             p.Name = "Existing,";
 
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
             Task taskVoid = JsonConvert.PopulateObjectAsync("{'Name':'Appended'}", p, new JsonSerializerSettings
             {
                 Converters = new List<JsonConverter> { new StringAppenderConverter() }
             });
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 
             taskVoid.Wait();
 

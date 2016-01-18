@@ -131,7 +131,9 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JArray j = new JArray();
 
-            ExceptionAssert.Throws<ArgumentNullException>(() => { ((ICollection<JToken>)j).CopyTo(null, 0); }, @"Value cannot be null.
+            ExceptionAssert.Throws<ArgumentNullException>(() => { ((ICollection<JToken>)j).CopyTo(null, 0); },
+#if UNITY3D                @"Argument cannot be null.Parameter name: array",#endif
+                @"Value cannot be null.
 Parameter name: array");
         }
 
@@ -324,7 +326,12 @@ Parameter name: index");
         {
             JArray j = new JArray();
 
-            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => { j.Insert(-1, new JValue(1)); }, @"Index was out of range. Must be non-negative and less than the size of the collection.
+            ExceptionAssert.Throws<ArgumentOutOfRangeException>(() => { j.Insert(-1, new JValue(1)); },
+#if UNITY3D
+                @"Argument is out of range.
+Parameter name: index",
+#endif
+                @"Index was out of range. Must be non-negative and less than the size of the collection.
 Parameter name: index");
         }
 
@@ -576,4 +583,5 @@ Parameter name: index");
             Assert.AreEqual(false, ((IJsonLineInfo)a[2]).HasLineInfo());
         }
     }
+
 }

@@ -303,6 +303,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         //      //      Console.WriteLine(o.FirstOrderSpecified);
         //    }
 
+#if !UNITY3D
         public class OptionalOrder
         {
             // This field shouldn't be serialized 
@@ -313,7 +314,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             [System.Xml.Serialization.XmlIgnoreAttribute]
             public bool FirstOrderSpecified;
         }
-
+#endif
         public class FamilyDetails
         {
             public string Name { get; set; }
@@ -506,7 +507,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         public bool WeightSpecified;
 
         [JsonIgnore]
+#if !UNITY3D
         [System.Xml.Serialization.XmlIgnoreAttribute]
+#endif
         public bool HeightSpecified;
 
         [JsonIgnore]
