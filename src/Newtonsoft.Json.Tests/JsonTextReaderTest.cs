@@ -537,8 +537,10 @@ third line", jsonTextReader.Value);
             // low surrogate not preceded by high surrogate
             Assert.AreEqual("ABC \ufffd\ufffd DEF", ReadString("ABC \\udc00\\ud800 DEF"));
 
+#if !UNITY3D
             // make sure unencoded invalid surrogate characters don't make it through
             Assert.AreEqual("\ufffd\ufffd\ufffd", ReadString("\udc00\ud800\ud800"));
+#endif
 
             Assert.AreEqual("ABC \ufffd\b", ReadString("ABC \\ud800\\b"));
             Assert.AreEqual("ABC \ufffd ", ReadString("ABC \\ud800 "));
