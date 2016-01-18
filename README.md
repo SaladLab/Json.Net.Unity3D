@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/slry7u0dy894pevo/branch/master?svg=true)](https://ci.appveyor.com/project/veblush/json-net-unity3d/branch/master)
+
 # Newtonsoft Json.NET for Unity3D
 
 [Newtonsoft Json.NET](http://www.newtonsoft.com/json) is a de facto standard JSON library in .NET ecosystem.
@@ -34,11 +36,22 @@ Following works are done to make Json.NET support Unity3D.
  - Remove XML support.
  - Remove JPath class to reduce size of DLL.
  - Remove DiagnosticsTraceWriter support.
+ - Workaround for differences between Microsoft.NET & Unity3D-Mono.NET
 
 For Unity.Lite version, additional works are done to make more lite.
 
  - Remove JsonLinq (JToken, ...)
  - Remove Bson
+
+## Unit Test
+
+Tests in Json.NET are updated to be able to run under
+[UnityEditor Test Runner](http://docs.unity3d.com/Manual/testing-editortestsrunner.html).
+All tests pass under Microsoft .NET 3.5 but with UnityEditor some of them fail
+because there are not-implemented features and bugs in Unity3D-Mono framework.
+
+Result:
+![Test status](https://raw.githubusercontent.com/SaladbowlCreative/Json.Net.Unity3D/master/docs/UnitTestSummary.png) [Detailed Description](./docs/UnitTest.md)
 
 ## FAQ
 
