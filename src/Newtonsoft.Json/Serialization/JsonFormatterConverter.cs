@@ -54,8 +54,14 @@ namespace Newtonsoft.Json.Serialization
         {
             ValidationUtils.ArgumentNotNull(value, nameof(value));
 
+#if UNITY3D
+            if (value is JValue)
+                value = ((JValue)value).Value;
+            return (T)System.Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+#else
             JValue v = (JValue)value;
             return (T)System.Convert.ChangeType(v.Value, typeof(T), CultureInfo.InvariantCulture);
+#endif
         }
 
         public object Convert(object value, Type type)
