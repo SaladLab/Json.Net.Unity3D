@@ -49,8 +49,7 @@ Target "Test" (fun _ ->
 
 Target "Package" (fun _ ->
     (!! ("src/Newtonsoft.Json/bin/" + buildConfiguration + "/Newtonsoft.Json.dll*")) |> Copy "src/UnityPackage/Assets/Middlewares/JsonNet"
-    ("src/Newtonsoft.Json/bin/" + buildConfiguration + "Lite/Newtonsoft.Json.dll") |> CopyFile "src/UnityPackageLite/Assets/Middlewares/JsonNet/Newtonsoft.Json.Lite.dll"
-    ("src/Newtonsoft.Json/bin/" + buildConfiguration + "Lite/Newtonsoft.Json.dll.mdb") |> CopyFile "src/UnityPackageLite/Assets/Middlewares/JsonNet/Newtonsoft.Json.Lite.dll.mdb"
+    (!! ("src/Newtonsoft.Json/bin/" + buildConfiguration + "Lite/Newtonsoft.Json.dll*")) |> Copy "src/UnityPackageLite/Assets/Middlewares/JsonNet"   
     Unity (Path.GetFullPath "src/UnityPackage") "-executeMethod PackageBuilder.BuildPackage"
     Unity (Path.GetFullPath "src/UnityPackageLite") "-executeMethod PackageBuilder.BuildPackage"
     (!! "src/UnityPackage/*.unitypackage") |> Seq.iter (fun p -> MoveFile binDir p)
