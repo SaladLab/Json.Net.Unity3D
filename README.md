@@ -50,8 +50,19 @@ Tests in Json.NET are updated to be able to run under
 All tests pass under Microsoft .NET 3.5 but with UnityEditor some of them fail
 because there are not-implemented features and bugs in Unity3D-Mono framework.
 
-Result:
-![Test status](https://raw.githubusercontent.com/SaladbowlCreative/Json.Net.Unity3D/master/docs/UnitTestSummary.png) [Detailed Description](./docs/UnitTest.md)
+Test Result:
+
+| Profile        |:white_check_mark: Passed | :x: Failed | :white_circle: Ignored |
+| :------------- | -----------------------: | ---------: | ---------------------: |
+| Microsoft.NET  |                     1448 |          0 |                      1 |
+| Unity3D-Mono   |                     1435 |         13 |                      1 |
+
+Detailed Description is [here](./docs/UnitTest.md) to tell you what failed and why.
+
+## Unity Compatibility
+
+This library is tested on Unity 4.7, 5.2 and 5.3. For AOT environment like iOS, you
+need to use IL2CPP instead of obsolute Mono-AOT because IL2CPP handles generic code better than Mono-AOT. With Mono-AOT configuration, AOT related exception would be thrown.
 
 ## FAQ
 
