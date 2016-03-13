@@ -31,7 +31,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLite|AnyCPU'">
     <OutputPath>bin\ReleaseLite\</OutputPath>
-    <DefineConstants>TRACE;NET35;UNITY3D;NO_JSONLINQ;NO_BSON;</DefineConstants>
+    <DefineConstants>TRACE;NET35;UNITY3D;NO_JSONLINQ;NO_JSONPATH;NO_BSON;</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -115,6 +115,16 @@
     <Compile Include="Linq\JRaw.cs" />
     <Compile Include="Linq\JsonLoadSettings.cs" />
     <Compile Include="Linq\JsonMergeSettings.cs" />
+    <Compile Include="Linq\JsonPath\ArrayIndexFilter.cs" />
+    <Compile Include="Linq\JsonPath\ArrayMultipleIndexFilter.cs" />
+    <Compile Include="Linq\JsonPath\ArraySliceFilter.cs" />
+    <Compile Include="Linq\JsonPath\FieldFilter.cs" />
+    <Compile Include="Linq\JsonPath\FieldMultipleFilter.cs" />
+    <Compile Include="Linq\JsonPath\JPath.cs" />
+    <Compile Include="Linq\JsonPath\PathFilter.cs" />
+    <Compile Include="Linq\JsonPath\QueryExpression.cs" />
+    <Compile Include="Linq\JsonPath\QueryFilter.cs" />
+    <Compile Include="Linq\JsonPath\ScanFilter.cs" />
     <Compile Include="Linq\JToken.cs" />
     <Compile Include="Linq\JTokenEqualityComparer.cs" />
     <Compile Include="Linq\JTokenReader.cs" />

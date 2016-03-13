@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,6 +16,7 @@ public class JsonNetSample : MonoBehaviour
         SerailizeJson();
         DeserializeJson();
         LinqToJson();
+        JsonPath();
     }
 
     void WriteLine(string msg)
@@ -104,5 +104,50 @@ public class JsonNetSample : MonoBehaviour
 
         string json = o.ToString();
         WriteLine(json);
+    }
+
+    private void JsonPath()
+    {
+        WriteLine("* JsonPath");
+
+        var o = JObject.Parse(@"{
+            'Stores': [
+            'Lambton Quay',
+            'Willis Street'
+            ],
+            'Manufacturers': [
+            {
+                'Name': 'Acme Co',
+                'Products': [
+                {
+                    'Name': 'Anvil',
+                    'Price': 50
+                }
+                ]
+            },
+            {
+                'Name': 'Contoso',
+                'Products': [
+                {
+                    'Name': 'Elbow Grease',
+                    'Price': 99.95
+                },
+                {
+                    'Name': 'Headlight Fluid',
+                    'Price': 4
+                }
+                ]
+            }
+            ]
+        }");
+
+        JToken acme = o.SelectToken("$.Manufacturers[?(@.Name == 'Acme Co')]");
+        WriteLine(acme.ToString());
+
+        IEnumerable<JToken> pricyProducts = o.SelectTokens("$..Products[?(@.Price >= 50)].Name");
+        foreach (var item in pricyProducts)
+        {
+            WriteLine(item.ToString());
+        }
     }
 }

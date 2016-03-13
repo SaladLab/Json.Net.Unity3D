@@ -27,7 +27,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !UNITY3D
+#if !NO_JSONPATH
 using Newtonsoft.Json.Linq.JsonPath;
 #endif
 #if !(NET35 || NET20 || PORTABLE40)
@@ -2292,7 +2292,7 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-#if !UNITY3D
+#if !NO_JSONPATH
         /// <summary>
         /// Selects a <see cref="JToken"/> using a JPath expression. Selects the token that matches the object path.
         /// </summary>

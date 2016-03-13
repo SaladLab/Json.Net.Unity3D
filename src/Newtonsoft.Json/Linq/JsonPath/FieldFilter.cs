@@ -1,3 +1,5 @@
+#if !NO_JSONPATH
+
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
@@ -47,3 +49,5 @@ namespace Newtonsoft.Json.Linq.JsonPath
         }
     }
 }
+
+#endif

@@ -34,13 +34,12 @@ Following works are done to make Json.NET support Unity3D.
  - Remove code related with System.ComponentModel.
  - Remove System.Data and EntityKey support.
  - Remove XML support.
- - Remove JPath class to reduce size of DLL.
  - Remove DiagnosticsTraceWriter support.
  - Workaround for differences between Microsoft.NET & Unity3D-Mono.NET
 
 For Unity.Lite version, additional works are done to make more lite.
 
- - Remove JsonLinq (JToken, ...)
+ - Remove JsonLinq, JPath (JToken, ...)
  - Remove Bson
 
 ## Unit Test
@@ -54,8 +53,8 @@ Test Result:
 
 | Profile        |:white_check_mark: Passed | :x: Failed | :white_circle: Ignored |
 | :------------- | -----------------------: | ---------: | ---------------------: |
-| Microsoft.NET  |                     1448 |          0 |                      1 |
-| Unity3D-Mono   |                     1435 |         13 |                      1 |
+| Microsoft.NET  |                     1573 |          0 |                      1 |
+| Unity3D-Mono   |                     1560 |         13 |                      1 |
 
 Detailed Description is [here](./docs/UnitTest.md) to tell you what failed and why.
 
