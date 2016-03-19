@@ -49,6 +49,7 @@ using NUnit.Framework;
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests
@@ -135,6 +136,33 @@ namespace Newtonsoft.Json.Tests
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(1, arrayPool.FreeArrays.Count);
         }
+
+#if !(NET20 || NET35 || NET40 || NETFX_CORE || PORTABLE || PORTABLE40 || DNXCORE50)
+        [Test]
+        public void BufferErroringWithInvalidSize()
+        {
+            JObject o = new JObject
+            {
+                {"BodyHtml", "<h3>Title!</h3>" + Environment.NewLine + new string(' ', 100) + "<p>Content!</p>"}
+            };
+
+            JsonArrayPool arrayPool = new JsonArrayPool();
+
+            StringWriter sw = new StringWriter();
+            using (JsonTextWriter writer = new JsonTextWriter(sw))
+            {
+                writer.ArrayPool = arrayPool;
+
+                o.WriteTo(writer);
+            }
+
+            string result = o.ToString();
+
+            Assert.AreEqual(@"{
+  ""BodyHtml"": ""<h3>Title!</h3>\r\n                                                                                                    <p>Content!</p>""
+}", result);
+        }
+#endif
 
         [Test]
         public void NewLine()
@@ -931,6 +959,7 @@ namespace Newtonsoft.Json.Tests
                     "Input string was not in the correct format: nDigits == 0.",
 #endif
                     "Input string was not in a correct format.");
+
 
                 ExceptionAssert.Throws<ArgumentNullException>(() => { jsonWriter.WriteToken(JsonToken.Integer); },
 #if UNITY3D

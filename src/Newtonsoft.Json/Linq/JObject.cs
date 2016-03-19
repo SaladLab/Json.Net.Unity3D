@@ -189,7 +189,7 @@ namespace Newtonsoft.Json.Linq
                     JContainer existingContainer = existingProperty.Value as JContainer;
                     if (existingContainer == null)
                     {
-                        if (contentItem.Value.Type != JTokenType.Null)
+                        if (contentItem.Value.Type != JTokenType.Null || settings?.MergeNullValueHandling == MergeNullValueHandling.Merge)
                         {
                             existingProperty.Value = contentItem.Value;
                         }

@@ -132,7 +132,10 @@ namespace Newtonsoft.Json.Tests.Linq
             JArray j = new JArray();
 
             ExceptionAssert.Throws<ArgumentNullException>(() => { ((ICollection<JToken>)j).CopyTo(null, 0); },
-#if UNITY3D                @"Argument cannot be null.Parameter name: array",#endif
+#if UNITY3D
+                @"Argument cannot be null.
+Parameter name: array",
+#endif
                 @"Value cannot be null.
 Parameter name: array");
         }
@@ -583,5 +586,4 @@ Parameter name: index");
             Assert.AreEqual(false, ((IJsonLineInfo)a[2]).HasLineInfo());
         }
     }
-
 }
