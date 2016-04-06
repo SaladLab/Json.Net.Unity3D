@@ -1,6 +1,6 @@
 # UnitTest
 
-![Test](https://raw.githubusercontent.com/SaladbowlCreative/Json.Net.Unity3D/master/docs/UnitTestResult.png)
+![Test](https://raw.githubusercontent.com/SaladLab/Json.Net.Unity3D/master/docs/UnitTestResult.png)
 
 ## Failed tests
 

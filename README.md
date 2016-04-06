@@ -8,11 +8,11 @@ This package is for Unity3D programmers that need to use latest Json.NET in Unit
 
 ## Where can I get it?
 
-Visit [Release](https://github.com/SaladbowlCreative/Json.Net.Unity3D/releases)
+Visit [Release](https://github.com/SaladLab/Json.Net.Unity3D/releases)
 page to get latest Json.NET unity-package.
 
 To use this library in IL2CPP build settings, you need to add
-[link.xml](https://github.com/SaladbowlCreative/Json.Net.Unity3D/blob/master/src/UnityPackage/Assets/link.xml) to your project's asset folder.
+[link.xml](https://github.com/SaladLab/Json.Net.Unity3D/blob/master/src/UnityPackage/Assets/link.xml) to your project's asset folder.
 For detailed information about link.xml, read unity [manual](http://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) about this.
 
 ## What's the deal?
