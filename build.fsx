@@ -1,80 +1,59 @@
 ﻿#I @"packages/FAKE/tools"
+#I @"packages/FAKE.BuildLib/lib/net451"
 #r "FakeLib.dll"
+#r "BuildLib.dll"
 
 open Fake
 open Fake.FileHelper
+open BuildLib
 open System.IO
 
-// ---------------------------------------------------------------------------- Variables
+let solution = 
+    initSolution
+        "./Json.Net.Unity3D.sln" "Release" []
 
-let buildSolutionFile = "./Json.Net.Unity3D.sln"
-let buildConfiguration = "Release"
-let binDir = "bin"
-let testDir = binDir @@ "test"
+Target "Clean" <| fun _ -> cleanBin
 
-// ------------------------------------------------------------------------- Unity Helper
+Target "Restore" <| fun _ -> restoreNugetPackages solution
 
-let UnityPath = 
-    @"C:\Program Files\Unity\Editor\Unity.exe" 
-
-let Unity projectPath args = 
-    let result = Shell.Exec(UnityPath, "-quit -batchmode -logFile -projectPath \"" + projectPath + "\" " + args) 
-    if result < 0 then failwithf "Unity exited with error %d" result 
-
-// ------------------------------------------------------------------------------ Targets
-
-Target "Clean" (fun _ -> 
-    CleanDirs [binDir]
-)
-
-Target "Build" (fun _ ->
+Target "Build" <| fun _ ->
     // Regular
-    !! buildSolutionFile
-    |> MSBuild "" "Rebuild" [ "Configuration", buildConfiguration ]
-    |> Log "Build-Output: "
+    buildSolution solution
     // Lite
-    !! buildSolutionFile
-    |> MSBuild "" "Rebuild" [ "Configuration", buildConfiguration + "Lite" ]
-    |> Log "Build-Output: "    
-)
+    !!solution.SolutionFile
+    |> MSBuild "" "Rebuild" [ "Configuration", solution.Configuration + "Lite" ]
+    |> Log "Build-Output: "
 
-Target "Test" (fun _ ->  
+
+Target "Test" <| fun _ -> 
+    let nunitRunnerDir = lazy ((getNugetPackage "NUnit.Runners" "2.6.4") @@ "tools")
     ensureDirectory testDir
-    !! ("./src/**/bin/" + buildConfiguration + "/*.Tests.dll")
+    !! ("./src/**/bin/" + solution.Configuration + "/*.Tests.dll")
     |> NUnit (fun p -> 
-        {p with 
-            DisableShadowCopy = true;
-            OutputFile = testDir @@ "TestResult.xml" })
-)
+        {p with ToolPath = nunitRunnerDir.Force()
+                DisableShadowCopy = true;
+                OutputFile = testDir @@ "test.xml" })
 
-Target "Package" (fun _ ->
-    (!! ("src/Newtonsoft.Json/bin/" + buildConfiguration + "/Newtonsoft.Json.dll*")) |> Copy "src/UnityPackage/Assets/Middlewares/JsonNet"
-    (!! ("src/Newtonsoft.Json/bin/" + buildConfiguration + "Lite/Newtonsoft.Json.dll*")) |> Copy "src/UnityPackageLite/Assets/Middlewares/JsonNet"
-    (!! ("src/Newtonsoft.Json.Tests/bin/" + buildConfiguration + "/Newtonsoft.Json.Tests.dll*")) |> Copy "src/UnityPackage/Assets/Editor"
-    Unity (Path.GetFullPath "src/UnityPackage") "-executeMethod PackageBuilder.BuildPackage"
-    Unity (Path.GetFullPath "src/UnityPackageLite") "-executeMethod PackageBuilder.BuildPackage"
-    (!! "src/UnityPackage/*.unitypackage") |> Seq.iter (fun p -> MoveFile binDir p)
-    (!! "src/UnityPackageLite/*.unitypackage") |> Seq.iter (fun p -> MoveFile binDir p)
-)
+Target "PackUnity" <| fun _ ->
+    packUnityPackage "./src/UnityPackage/JsonNet.unitypackage.json"
+    packUnityPackage "./src/UnityPackage/JsonNet-Lite.unitypackage.json"
 
-Target "Help" (fun _ ->  
-    List.iter printfn [
-      "usage:"
-      "build [target]"
-      ""
-      " Targets for building:"
-      " * Build        Build"
-      " * Test         Test"
-      " * Package      Build Unity Package"
-      ""]
-)
+Target "Pack" <| fun _ -> ()
 
-// --------------------------------------------------------------------------- Dependency
+Target "CI" <| fun _ -> ()
 
-// Build order
+Target "Help" <| fun _ ->
+    showUsage solution (fun _ -> None)
+
 "Clean"
+  ==> "Restore"
   ==> "Build"
   ==> "Test"
-  ==> "Package"
 
-RunTargetOrDefault "Package"
+"Build" ==> "PackUnity"
+"PackUnity" ==> "Pack"
+
+"Test" ==> "CI"
+"Pack" ==> "CI"
+
+RunTargetOrDefault "Help"

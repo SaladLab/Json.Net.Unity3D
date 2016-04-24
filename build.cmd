@@ -2,11 +2,23 @@
 
 pushd %~dp0
 
-tools\nuget\NuGet.exe update -self
-tools\nuget\NuGet.exe install FAKE -ConfigFile tools\nuget\Nuget.Config -OutputDirectory packages -ExcludeVersion -Version 4.7.3
-tools\nuget\NuGet.exe install nunit.runners -ConfigFile tools\nuget\Nuget.Config -OutputDirectory packages\FAKE -ExcludeVersion -Version 2.6.4
+SET PACKAGEPATH=.\packages\
+SET NUGET=.\tools\nuget\NuGet.exe
+SET NUGETOPTIONS=-ConfigFile .\tools\nuget\NuGet.Config -OutputDirectory %PACKAGEPATH% -ExcludeVersion
+
+IF NOT EXIST %PACKAGEPATH%FAKE\Ver_4.25.4 (
+  RD /S/Q %PACKAGEPATH%FAKE
+  %NUGET% install FAKE -Version 4.25.4 %NUGETOPTIONS%
+  COPY NUL %PACKAGEPATH%FAKE\Ver_4.25.4
+)
+
+IF NOT EXIST %PACKAGEPATH%FAKE.BuildLib\Ver_0.2.7 (
+  RD /S/Q %PACKAGEPATH%FAKE.BuildLib
+  %NUGET% install FAKE.BuildLib -Version 0.2.7 %NUGETOPTIONS%
+  COPY NUL %PACKAGEPATH%FAKE.BuildLib\Ver_0.2.7
+)
 
 set encoding=utf-8
-packages\FAKE\tools\FAKE.exe build.fsx %*
+"%PACKAGEPATH%FAKE\tools\FAKE.exe" build.fsx %*
 
 popd

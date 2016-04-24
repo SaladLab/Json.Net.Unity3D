@@ -1,10 +1,12 @@
-version: 8.0.2.{build}
+version: 8.0.3.{build}
 os: Visual Studio 2015
-configuration: Release
 init:
 - git config --global core.autocrlf true
-before_build:
-- cmd: nuget restore
-build:
-  project: Json.Net.Unity3D.sln
-  verbosity: minimal
+test: off
+build_script:
+- cmd: build.cmd ci
+artifacts:
+  - path: './bin/unity/*.unitypackage'
+    name: UnityPackage
+cache:
+- packages -> **\packages.config
