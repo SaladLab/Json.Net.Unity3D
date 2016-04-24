@@ -2,6 +2,7 @@
   "#base": "JsonNet.base.json",
   "id": "JsonNet",
   "files": [
-    "../Newtonsoft.Json/bin/Release/Newtonsoft.Json.dll"
+    "../Newtonsoft.Json/bin/Release/Newtonsoft.Json.dll",
+    { "source": "Assets/JsonNetSample*", "target": "$homebase$/JsonNetSample/", "extra": true }
   ]
 }

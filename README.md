@@ -12,7 +12,7 @@ Visit [Release](https://github.com/SaladLab/Json.Net.Unity3D/releases)
 page to get latest Json.NET unity-package.
 
 To use this library in IL2CPP build settings, you need to add
-[link.xml](https://github.com/SaladLab/Json.Net.Unity3D/blob/master/src/UnityTest/Assets/link.xml) to your project's asset folder.
+[link.xml](https://github.com/SaladLab/Json.Net.Unity3D/blob/master/src/UnityPackage/Assets/link.xml) to your project's asset folder.
 For detailed information about link.xml, read unity [manual](http://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) about this.
 
 ## What's the deal?
