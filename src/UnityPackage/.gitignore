@@ -25,6 +25,6 @@ sysinfo.txt
 *.unitypackage
 
 # Artifacts generated when build
-Assets/Newtonsoft.Json.dll*
-Assets/Editor/Newtonsoft.Json.Tests.dll*
+Assets/Artifacts/Newtonsoft.Json.*
+Assets/Artifacts/Editor/Newtonsoft.Json.*
 SpaceShipV2.bson
