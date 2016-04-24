@@ -1,0 +1,6 @@
+{
+  "version": "8.0.3",
+  "authors": [ "James Newton-King" ],
+  "owners": [ "Esun Kim" ],
+  "description": "Unity3D port of Json.NET which is a popular high-performance JSON framework for .NET"
+}
