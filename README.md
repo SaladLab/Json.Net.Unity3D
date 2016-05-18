@@ -63,6 +63,9 @@ Detailed Description is [here](./docs/UnitTest.md) to tell you what failed and w
 This library is tested on Unity 4.7, 5.2 and 5.3. For AOT environment like iOS, you
 need to use IL2CPP instead of obsolute Mono-AOT because IL2CPP handles generic code better than Mono-AOT. With Mono-AOT configuration, AOT related exception would be thrown.
 
+For windows store build, there is a compatibility issue related with UWP.
+If you have a problem, please read [workaround for UWP](./docs/UwpWorkaround.md).
+
 ## FAQ
 
  - Q: App stops throwing MissingMethodException for ComponentModel.TypeConverter like this.
