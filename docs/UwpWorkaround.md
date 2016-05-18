@@ -40,4 +40,5 @@ which contains a DLL for UWP.
      uncheck `Any Platform` at Select platforms for plugin
      and set only `WSAPlayer` checked.
 
-Done!
+If you feel complicated, just download
+[this ](https://github.com/SaladLab/Json.Net.Unity3D/releases/download/8.0.3/JsonNet-UwpWorkaround.8.0.3.zip) and extract it to `Assets/UnityPackages/JsonNet` directory in your project.
