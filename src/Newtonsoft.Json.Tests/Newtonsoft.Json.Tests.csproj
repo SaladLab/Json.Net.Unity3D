@@ -276,7 +276,8 @@
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)tools\unity3d\pdb2mdb.exe $(TargetPath)
 COPY /Y $(TargetPath)* $(SolutionDir)src\UnityPackage\Assets\Artifacts\Editor
-COPY /Y $(ProjectDir)SpaceShipV2.bson $(SolutionDir)src\UnityPackage</PostBuildEvent>
+COPY /Y $(ProjectDir)SpaceShipV2.bson $(SolutionDir)src\UnityPackage
+COPY /Y $(ProjectDir)large.json $(SolutionDir)src\UnityPackage</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
