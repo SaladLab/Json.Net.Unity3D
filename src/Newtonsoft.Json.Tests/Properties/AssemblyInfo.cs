@@ -31,12 +31,16 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-#if PORTABLE40
+#if NETSTANDARD10
+[assembly: AssemblyTitle("Json.NET Tests .NET Standard 1.0")]
+#elif PORTABLE40
 [assembly: AssemblyTitle("Json.NET Tests Portable .NET 4.0")]
 #elif PORTABLE
 [assembly: AssemblyTitle("Json.NET Tests Portable")]
 #elif NETFX_CORE
 [assembly: AssemblyTitle("Json.NET Tests WinRT")]
+#elif UNITY3D
+[assembly: AssemblyTitle("Json.NET Tests Unity3D")]
 #elif NET20
 [assembly: AssemblyTitle("Json.NET Tests .NET 2.0")]
 #elif NET35
@@ -44,6 +48,7 @@ using System.Security;
 #elif NET40
 [assembly: AssemblyTitle("Json.NET Tests .NET 4.0")]
 #else
+
 [assembly: AssemblyTitle("Json.NET Tests")]
 #endif
 
@@ -75,5 +80,5 @@ using System.Security;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("8.0.0.0")]
-[assembly: AssemblyFileVersion("8.0.3.19514")]
+[assembly: AssemblyVersion("7.0.0.0")]
+[assembly: AssemblyFileVersion("7.0.2.18802")]

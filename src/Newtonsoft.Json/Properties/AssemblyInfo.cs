@@ -101,6 +101,6 @@ using System.Security;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("8.0.0.0")]
-[assembly: AssemblyFileVersion("8.0.3.19514")]
+[assembly: AssemblyVersion("9.0.0.0")]
+[assembly: AssemblyFileVersion("9.0.1.19813")]
 [assembly: CLSCompliant(true)]

@@ -353,30 +353,7 @@ namespace Newtonsoft.Json.Linq
             return item;
         }
 
-        private class JTokenReferenceEqualityComparer : IEqualityComparer<JToken>
-        {
-            public static readonly JTokenReferenceEqualityComparer Instance = new JTokenReferenceEqualityComparer();
-
-            public bool Equals(JToken x, JToken y)
-            {
-                return ReferenceEquals(x, y);
-            }
-
-            public int GetHashCode(JToken obj)
-            {
-                if (obj == null)
-                {
-                    return 0;
-                }
-
-                return obj.GetHashCode();
-            }
-        }
-
-        internal int IndexOfItem(JToken item)
-        {
-            return ChildrenTokens.IndexOf(item, JTokenReferenceEqualityComparer.Instance);
-        }
+        internal abstract int IndexOfItem(JToken item);
 
         internal virtual void InsertItem(int index, JToken item, bool skipParentCheck)
         {
@@ -700,9 +677,10 @@ namespace Newtonsoft.Json.Linq
 
         internal static JToken CreateFromContent(object content)
         {
-            if (content is JToken)
+            JToken token = content as JToken;
+            if (token != null)
             {
-                return (JToken)content;
+                return token;
             }
 
             return new JValue(content);
@@ -784,7 +762,7 @@ namespace Newtonsoft.Json.Linq
 
             do
             {
-                if (parent is JProperty && ((JProperty)parent).Value != null)
+                if ((parent as JProperty)?.Value != null)
                 {
                     if (parent == this)
                     {
@@ -912,12 +890,7 @@ namespace Newtonsoft.Json.Linq
         PropertyDescriptorCollection ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
         {
             ICustomTypeDescriptor d = First as ICustomTypeDescriptor;
-            if (d != null)
-            {
-                return d.GetProperties();
-            }
-
-            return null;
+            return d?.GetProperties();
         }
 #endif
 
@@ -983,9 +956,10 @@ namespace Newtonsoft.Json.Linq
                 return null;
             }
 
-            if (value is JToken)
+            JToken token = value as JToken;
+            if (token != null)
             {
-                return (JToken)value;
+                return token;
             }
 
             throw new ArgumentException("Argument is not a JToken.");
@@ -1194,7 +1168,7 @@ namespace Newtonsoft.Json.Linq
                         }
                     }
 #else
-                    IDictionary<JToken, bool> items = new Dictionary<JToken, bool>(EqualityComparer);
+                    Dictionary<JToken, bool> items = new Dictionary<JToken, bool>(EqualityComparer);
                     foreach (JToken t in target)
                     {
                         items[t] = true;

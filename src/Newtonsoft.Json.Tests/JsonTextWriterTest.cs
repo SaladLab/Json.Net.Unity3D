@@ -960,7 +960,6 @@ namespace Newtonsoft.Json.Tests
 #endif
                     "Input string was not in a correct format.");
 
-
                 ExceptionAssert.Throws<ArgumentNullException>(() => { jsonWriter.WriteToken(JsonToken.Integer); },
 #if UNITY3D
                     @"Argument cannot be null.
