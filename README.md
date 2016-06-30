@@ -29,7 +29,7 @@ when you use official Json.NET dll targetting .NET 3.5 Framework.
 
 Following works are done to make Json.NET support Unity3D.
 
- - Based on Newtonsoft Json.NET 8.
+ - Based on Newtonsoft Json.NET 9.
  - Disable IL generation to work well under AOT environment like iOS.
  - Remove code related with System.ComponentModel.
  - Remove System.Data and EntityKey support.
@@ -53,8 +53,8 @@ Test Result:
 
 | Profile        |:white_check_mark: Passed | :x: Failed | :white_circle: Ignored |
 | :------------- | -----------------------: | ---------: | ---------------------: |
-| Microsoft.NET  |                     1573 |          0 |                      1 |
-| Unity3D-Mono   |                     1560 |         13 |                      1 |
+| Microsoft.NET  |                     1605 |          0 |                      1 |
+| Unity3D-Mono   |                     1592 |         13 |                      1 |
 
 Detailed Description is [here](./docs/UnitTest.md) to tell you what failed and why.
 
