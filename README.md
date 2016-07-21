@@ -70,8 +70,6 @@ If you have a problem, please read [workaround for UWP](./docs/UwpWorkaround.md)
 
 #### Q: `MissingMethodException` is thrown for `ComponentModel.TypeConverter`.
 
-Example error log:
-
 ```csharp
 MissingMethodException: Method not found:
 Default constructor not found...ctor() of System.ComponentModel.TypeConverter.
@@ -81,24 +79,19 @@ Make sure that `link.xml` is added to your project.
 
 #### Q: `ExecutionEngineException` is thrown in calling `CreateValueInternal`.
 
-Example error log:
-
 ```csharp
-ExecutionEngineException:
+xecutionEngineException:
   Attempting to call method 'CLASS::.cctor' for which no ahead of time (AOT) code was generated.
 at System.Reflection.MonoCMethod.Invoke (...)
 at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal
 ```
 
-Because Unity3D strips out unnecessary classes which is actually used by serialization,
-this exception is thrown. To fix this problem, just put `new CLASS()` in your code
-to prevent Unity3D from removing the class.
+This exception is thrown because Unity3D strips out unnecessary classes which are actually used by serialization.
+To fix this problem, just put `new CLASS()` in your code to prevent Unity3D from removing the class.
 
 Reference: [TroubleShootingIPhone](https://docs.unity3d.com/Manual/TroubleShootingIPhone.html)
 
 #### Q: `ArgumentNullException` is thrown in calling `CreateParameterizedConstructor`.
-
-Example error log:
 
 ```csharp
 ArgumentNullException: Argument cannot be null.
@@ -109,5 +102,5 @@ at Newtonsoft.Json.Utilities.LateBoundReflectionDelegateFactory.CreateParameteri
 
 This is similar with the previous case. But this case is tricky because this is
 caused by Json.NET internal classes such as `CollectionWrapper<T>`.
-To fix this problem, put `Newtonsoft.Json.Utilities.AotHelper.EnsureList<T>();` if you use `HashSet<T>`
-or `Newtonsoft.Json.Utilities.AotHelper.EnsureDictionary<TKey, TValue>();` if you use `Dictionary<TKey, TValue>` in working class.
+To fix this problem, put `AotHelper.EnsureList<T>()` if you use `HashSet<T>`
+or `AotHelper.EnsureDictionary<TKey, TValue>()` if you use `Dictionary<TKey, TValue>` in working class.
