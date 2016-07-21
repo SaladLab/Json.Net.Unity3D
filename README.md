@@ -68,7 +68,7 @@ If you have a problem, please read [workaround for UWP](./docs/UwpWorkaround.md)
 
 ## FAQ
 
-#### `MissingMethodException` is thrown for `ComponentModel.TypeConverter`.
+#### Q: `MissingMethodException` is thrown for `ComponentModel.TypeConverter`.
 
 Example error log:
 
@@ -79,7 +79,7 @@ Default constructor not found...ctor() of System.ComponentModel.TypeConverter.
 
 Make sure that `link.xml` is added to your project.
 
-#### `ExecutionEngineException` is thrown in calling `CreateValueInternal`.
+#### Q: `ExecutionEngineException` is thrown in calling `CreateValueInternal`.
 
 Example error log:
 
@@ -96,7 +96,7 @@ to prevent Unity3D from removing the class.
 
 Reference: [TroubleShootingIPhone](https://docs.unity3d.com/Manual/TroubleShootingIPhone.html)
 
-#### `ArgumentNullException` is thrown in calling `CreateParameterizedConstructor`.
+#### Q: `ArgumentNullException` is thrown in calling `CreateParameterizedConstructor`.
 
 Example error log:
 
