@@ -188,6 +188,7 @@
     <Compile Include="StringEscapeHandling.cs" />
     <Compile Include="TraceLevel.cs" />
     <Compile Include="TypeNameHandling.cs" />
+    <Compile Include="Utilities\AotHelper.cs" />
     <Compile Include="Utilities\Base64Encoder.cs" />
     <Compile Include="Utilities\BidirectionalDictionary.cs" />
     <Compile Include="Utilities\CollectionUtils.cs" />
