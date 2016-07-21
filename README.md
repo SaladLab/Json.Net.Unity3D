@@ -68,9 +68,46 @@ If you have a problem, please read [workaround for UWP](./docs/UwpWorkaround.md)
 
 ## FAQ
 
- - Q: App stops throwing MissingMethodException for ComponentModel.TypeConverter like this.
-```
+#### `MissingMethodException` is thrown for `ComponentModel.TypeConverter`.
+
+Example error log:
+
+```csharp
 MissingMethodException: Method not found:
-'Default constructor not found...ctor() of System.ComponentModel.TypeConverter'.
+Default constructor not found...ctor() of System.ComponentModel.TypeConverter.
 ```
- - A: link.xml should be added to your project.
+
+Make sure that `link.xml` is added to your project.
+
+#### `ExecutionEngineException` is thrown in calling `CreateValueInternal`.
+
+Example error log:
+
+```csharp
+ExecutionEngineException:
+  Attempting to call method 'CLASS::.cctor' for which no ahead of time (AOT) code was generated.
+at System.Reflection.MonoCMethod.Invoke (...)
+at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal
+```
+
+Because Unity3D strips out unnecessary classes which is actually used by serialization,
+this exception is thrown. To fix this problem, just put `new CLASS()` in your code
+to prevent Unity3D from removing the class.
+
+Reference: [TroubleShootingIPhone](https://docs.unity3d.com/Manual/TroubleShootingIPhone.html)
+
+#### `ArgumentNullException` is thrown in calling `CreateParameterizedConstructor`.
+
+Example error log:
+
+```csharp
+ArgumentNullException: Argument cannot be null.
+Parameter name: method
+at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull (...)
+at Newtonsoft.Json.Utilities.LateBoundReflectionDelegateFactory.CreateParameterizedConstructor (...)
+```
+
+This is similar with the previous case. But this case is tricky because this is
+caused by Json.NET internal classes such as `CollectionWrapper<T>`.
+To fix this problem, put `Newtonsoft.Json.Utilities.AotHelper.EnsureList<T>();` if you use `HashSet<T>`
+or `Newtonsoft.Json.Utilities.AotHelper.EnsureDictionary<TKey, TValue>();` if you use `Dictionary<TKey, TValue>` in working class.
