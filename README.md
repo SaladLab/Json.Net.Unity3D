@@ -18,7 +18,7 @@ For detailed information about link.xml, read unity [manual](http://docs.unity3d
 ## What's the deal?
 
 Unity3D has old-fashioned and bizarre .NET Framework like these :)
- - Basically based on .NET Framework 3.5 ([forked Mono 2.6](https://github.com/Unity-Technologies/mono/commits/unity-staging))
+ - Basically based on .NET Framework 3.5 ([forked Mono](https://github.com/Unity-Technologies/mono/commits/unity-master))
  - Runtime lacks some types in .NET Framework 3.5 (like System.ComponentModel.AddingNewEventHandler)
  - For iOS, dynamic code emission is forbidden by Apple AppStore.
 
