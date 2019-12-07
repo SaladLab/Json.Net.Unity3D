@@ -80,7 +80,7 @@ Make sure that `link.xml` is added to your project.
 #### Q: `ExecutionEngineException` is thrown in calling `CreateValueInternal`.
 
 ```csharp
-xecutionEngineException:
+ExecutionEngineException:
   Attempting to call method 'CLASS::.cctor' for which no ahead of time (AOT) code was generated.
 at System.Reflection.MonoCMethod.Invoke (...)
 at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal
